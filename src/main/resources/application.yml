@@ -6,8 +6,6 @@ spring:
     url: jdbc:sqlserver://localhost:1434;database=test;schema=dbo
     username: sa
     password: Strong!Passw0rd
-    hikari:
-      connection-test-query: SELECT 1
 
   jpa:
     show_sql: true

@@ -59,7 +59,6 @@ public class ShutdownConfig {
                 try {
                     ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) executor;
                     log.info("shutdown start");
-                    log.info("active count: " + threadPoolExecutor.getActiveCount());
                     if (threadPoolExecutor.getActiveCount() <= 1) {
                         threadPoolExecutor.awaitTermination(1, TimeUnit.NANOSECONDS);
                     } else {

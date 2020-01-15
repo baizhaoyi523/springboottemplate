@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
-import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 
 @Component
 @RequiredArgsConstructor
@@ -35,7 +34,6 @@ public class LoginFailureHandler implements AuthenticationFailureHandler, Authen
     private void reply(HttpServletResponse response) throws IOException {
         ExceptionResource resource = new ExceptionResource(UNAUTHORIZED.getReasonPhrase());
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
-        response.setContentType(APPLICATION_JSON_UTF8_VALUE);
         response.getWriter().println(objectMapper.writeValueAsString(resource));
     }
 }

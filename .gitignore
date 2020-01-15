@@ -1,14 +1,14 @@
 # gradle
-.gradle/
-build/
+.gradle
+build
 .gradletasknamecache
 
 # idea
 *.ipr
 *.iws
 *.iml
-.idea/
-out/
+.idea
+out
 .shelf/
 .ideaDataSources/
 dataSources/
