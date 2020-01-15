@@ -135,8 +135,8 @@ task jacocoApiTestCoverageVerification(type: JacocoCoverageVerification) {
     }
 }
 
-//All test===========================
-//Unit test and component test and API test coverage all together
+//All tests===========================
+//Unit test, component test and API test coverage all together
 task jacocoAllTestReport(type: JacocoReport) {
     shouldRunAfter check
     sourceSets sourceSets.main

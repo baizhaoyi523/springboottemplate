@@ -21,6 +21,7 @@ public class ShutdownRestController implements ApplicationContextAware {
     public void shutdown() {
         if (context == null) {
             log.warn("cannot shutdown because context is null");
+            return;
         }
         context.close();
     }

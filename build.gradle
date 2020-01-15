@@ -56,7 +56,7 @@ apiTest {
 }
 
 apply from: "${rootProject.projectDir}/gradle/idea.gradle"
-apply from: "${rootProject.projectDir}/gradle/jacoco.gradle"
+//apply from: "${rootProject.projectDir}/gradle/jacoco.gradle"
 apply from: "${rootProject.projectDir}/gradle/checkstyle.gradle"
 apply from: "${rootProject.projectDir}/gradle/spotbugs.gradle"
 apply from: "${rootProject.projectDir}/gradle/git-hooks.gradle"
@@ -103,6 +103,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     implementation 'com.fasterxml.jackson.core:jackson-core'
     implementation 'com.google.guava:guava:28.0-jre'
+    annotationProcessor 'com.google.guava:guava:28.0-jre'
 
     // persistence
     implementation 'com.microsoft.sqlserver:mssql-jdbc:7.2.1.jre8'

@@ -22,7 +22,9 @@ public class ShutdownRequestFilter extends OncePerRequestFilter {
     private final ShutdownProperties shutdownProperties;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request,
+                                    HttpServletResponse response,
+                                    FilterChain filterChain) throws ServletException, IOException {
         if (shutdownProperties.isEntireServiceEnabled()) {
             filterChain.doFilter(request, response);
         } else {
