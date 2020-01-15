@@ -1,22 +1,87 @@
 plugins {
     id 'java'
     id 'org.springframework.boot' version '2.2.2.RELEASE'
+    id "com.github.spotbugs" version "3.0.0"
+    id "org.owasp.dependencycheck" version "5.2.4"
 }
 
 apply plugin: 'java'
 apply plugin: 'io.spring.dependency-management'
 
+sourceSets {
+    componentTest {
+        compileClasspath += sourceSets.main.output + sourceSets.test.output
+        runtimeClasspath += sourceSets.main.output + sourceSets.test.output
+    }
+
+    apiTest {
+        resources {
+            srcDirs.add(file("src/apiTest/resources"))
+        }
+        compileClasspath += sourceSets.main.output + sourceSets.test.output
+        runtimeClasspath += sourceSets.main.output + sourceSets.test.output
+    }
+}
+
+task componentTest(type: Test) {
+    description = 'Runs component tests.'
+    group = 'verification'
+    testClassesDirs = sourceSets.componentTest.output.classesDirs
+    classpath = sourceSets.componentTest.runtimeClasspath
+    shouldRunAfter test
+}
+
+
+task apiTest(type: Test) {
+    description = 'Runs Api tests.'
+    group = 'verification'
+    testClassesDirs = sourceSets.apiTest.output.classesDirs
+    classpath = sourceSets.apiTest.runtimeClasspath
+    shouldRunAfter componentTest
+}
+
+check.dependsOn componentTest
+check.dependsOn apiTest
+
+test {
+    useJUnitPlatform()
+}
+
+componentTest {
+    useJUnitPlatform()
+}
+
+apiTest {
+    useJUnitPlatform()
+}
+
+apply from: "${rootProject.projectDir}/gradle/idea.gradle"
+apply from: "${rootProject.projectDir}/gradle/jacoco.gradle"
+apply from: "${rootProject.projectDir}/gradle/checkstyle.gradle"
+apply from: "${rootProject.projectDir}/gradle/spotbugs.gradle"
+apply from: "${rootProject.projectDir}/gradle/git-hooks.gradle"
+apply from: "${rootProject.projectDir}/gradle/dependency-check.gradle"
+
 group 'com.bzy'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
 }
 
-test {
-    useJUnitPlatform()
+configurations {
+    componentTestCompile.extendsFrom testCompile
+    componentTestRuntime.extendsFrom testRuntime
+
+    apiTestCompile.extendsFrom testCompile
+    apiTestRuntime.extendsFrom testRuntime
+}
+
+configurations.all {
+    exclude group: 'org.quartz-scheduler', module: 'quartz'
 }
 
 dependencies {

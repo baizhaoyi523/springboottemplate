@@ -1,0 +1,13 @@
+apply plugin: 'checkstyle'
+
+checkstyle {
+    sourceSets = [sourceSets.main]
+    maxWarnings = 0
+    ignoreFailures = false
+}
+
+tasks.withType(Checkstyle) {
+    exclude 'com/shell/logisticshub/gsap/order/api/**'
+}
+
+assemble.dependsOn checkstyleMain
