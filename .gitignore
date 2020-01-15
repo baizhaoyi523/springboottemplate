@@ -1,7 +1,6 @@
 # gradle
 .gradle/
 build/
-data/
 .gradletasknamecache
 
 # idea
@@ -18,7 +17,7 @@ dataSources/
 .DS_Store
 
 # querydsl
-src/querydsl
+src/main/generated
 
 # db
 *.db

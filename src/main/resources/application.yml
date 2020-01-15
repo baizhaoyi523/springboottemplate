@@ -1,7 +1,11 @@
+shutdown:
+  entire-service-enabled: true
+
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306?database?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=GMT%2B8
+    url: jdbc:sqlserver://localhost:1434;database=test;schema=dbo
+    username: sa
+    password: Strong!Passw0rd
     hikari:
       connection-test-query: SELECT 1
 
@@ -22,6 +26,9 @@ spring:
     user:
       name: admin
       password: admin
+
+  flyway:
+    enabled: true
 
 server:
   tomcat:
